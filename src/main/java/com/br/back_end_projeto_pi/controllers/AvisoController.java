@@ -13,36 +13,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.br.back_end_projeto_pi.models.Aviso;
 import com.br.back_end_projeto_pi.models.Monitor;
-import com.br.back_end_projeto_pi.services.MonitorService;
+import com.br.back_end_projeto_pi.services.AvisoService;
 
 @RestController
-@RequestMapping("/monitores")
-public class MonitorController {
+@RequestMapping("/avisos")
+public class AvisoController {
 	@Autowired
-	private MonitorService monitorService;
+	private AvisoService avisoService;
 	
 	@GetMapping
-	public ResponseEntity<List<Monitor>>listarMonitors(){
-		return monitorService.listarMonitors();
+	public ResponseEntity<List<Aviso>>listarMonitors(){
+		return avisoService.listarAvisos();
 	}
 	@GetMapping("/{id}")
-	public ResponseEntity<Monitor>buscarMonitorPorId(@PathVariable long id){
-		return monitorService.buscarMonitorPorId(id);
+	public ResponseEntity<Aviso>buscarMonitorPorId(@PathVariable long id){
+		return avisoService.buscarAvisoPorId(id);
 	}
 
 	@PostMapping("/criar")
-	public ResponseEntity<Monitor> criarMonitor(@RequestBody Monitor monitor) {
-		return monitorService.criarMonitor(monitor);
+	public ResponseEntity<Aviso> criarMonitor(@RequestBody Aviso aviso) {
+		return avisoService.criarAviso(aviso);
 	}
 	
 	@PutMapping("/atualizar/{id}")
-	public ResponseEntity<Monitor> atualizarMonitor(@PathVariable long id, @RequestBody Monitor monitor) {
-		return monitorService.atualizarMonitor(id, monitor);
+	public ResponseEntity<Aviso> atualizarMonitor(@PathVariable long id, @RequestBody Aviso aviso) {
+		return avisoService.atualizarAviso(id, aviso);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?>excluirMonitor(long id){
-		return monitorService.excluirMonitor(id);
+		return avisoService.excluirAviso(id);
 	}
 }
