@@ -26,8 +26,9 @@ public class AvisoService {
 		return ResponseEntity.ok(Aviso);
 	}
 	
-	public ResponseEntity<Aviso>criarAviso(Aviso Aviso){
-		return ResponseEntity.ok(avisoRepository.save(Aviso));
+	public ResponseEntity<Aviso>criarAviso(Aviso aviso){
+		avisoRepository.save(aviso);
+		return ResponseEntity.ok(aviso);
 	}
 	
 	public ResponseEntity<Aviso>atualizarAviso(long id,Aviso Aviso){
