@@ -25,15 +25,16 @@ public class MonitorService {
 		return ResponseEntity.ok(Monitor);
 	}
 	
-	public ResponseEntity<Monitor>criarMonitor(Monitor Monitor){
-		return ResponseEntity.ok(monitorRepository.save(Monitor));
+	public ResponseEntity<Monitor>criarMonitor(Monitor monitor){
+		return ResponseEntity.ok(monitorRepository.save(monitor));
 	}
 	
-	public ResponseEntity<Monitor>atualizarMonitor(long id,Monitor Monitor){
+	public ResponseEntity<Monitor>atualizarMonitor(long id,Monitor monitor){
 		if (monitorRepository.findById(id).orElse(null) == null) {
 			return ResponseEntity.badRequest().build();
 		}
-		return ResponseEntity.ok(monitorRepository.save(Monitor));
+		monitor.setId(id);
+		return ResponseEntity.ok(monitorRepository.save(monitor));
 	}
 	
 	public ResponseEntity<?>excluirMonitor(long id){

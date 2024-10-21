@@ -45,6 +45,7 @@ public class TurmaService {
 		if (turmaRepository.findById(id).orElse(null) == null) {
 			return ResponseEntity.badRequest().build();
 		}
+		turma.setId(id);
 		return ResponseEntity.ok(turmaRepository.save(turma));
 	}
 	

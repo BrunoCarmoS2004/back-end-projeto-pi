@@ -31,11 +31,12 @@ public class AvisoService {
 		return ResponseEntity.ok(aviso);
 	}
 	
-	public ResponseEntity<Aviso>atualizarAviso(long id,Aviso Aviso){
+	public ResponseEntity<Aviso>atualizarAviso(long id,Aviso aviso){
 		if (avisoRepository.findById(id).orElse(null) == null) {
 			return ResponseEntity.badRequest().build();
 		}
-		return ResponseEntity.ok(avisoRepository.save(Aviso));
+		aviso.setId(id);
+		return ResponseEntity.ok(avisoRepository.save(aviso));
 	}
 	
 	public ResponseEntity<?>excluirAviso(long id){
