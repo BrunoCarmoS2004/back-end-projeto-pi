@@ -25,42 +25,27 @@ public class AvisoController {
 	private AvisoService avisoService;
 	
 	@GetMapping
-	public ResponseEntity<List<Aviso>>listarMonitors(@RequestHeader("Token") String token){
-		if (!"UniFil2944".equals(token)) {
-			return ResponseEntity.badRequest().build();
-		}
+	public ResponseEntity<List<Aviso>>listarMonitors(){
 		return avisoService.listarAvisos();
 		
 	}
 	@GetMapping("/{id}")
-	public ResponseEntity<Aviso>buscarMonitorPorId(@PathVariable long id, @RequestHeader("Token")String token){
-		if (!"UniFil2944".equals(token)) {
-			return ResponseEntity.badRequest().build();
-		}
+	public ResponseEntity<Aviso>buscarMonitorPorId(@PathVariable long id){	
 		return avisoService.buscarAvisoPorId(id);
 	}
 
 	@PostMapping("/criar")
-	public ResponseEntity<Aviso> criarMonitor(@RequestBody Aviso aviso, @RequestHeader("Token")String token) {
-		if (!"UniFil2944".equals(token)) {
-			return ResponseEntity.badRequest().build();
-		}
+	public ResponseEntity<Aviso> criarMonitor(@RequestBody Aviso aviso) {		
 		return avisoService.criarAviso(aviso);
 	}
 	
 	@PutMapping("/atualizar/{id}")
-	public ResponseEntity<Aviso> atualizarMonitor(@PathVariable long id, @RequestBody Aviso aviso, @RequestHeader("Token")String token) {
-		if (!"UniFil2944".equals(token)) {
-			return ResponseEntity.badRequest().build();
-		}
+	public ResponseEntity<Aviso> atualizarMonitor(@PathVariable long id, @RequestBody Aviso aviso) {		
 		return avisoService.atualizarAviso(id, aviso);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?>excluirMonitor(long id, @RequestHeader("Token")String token){
-		if (!"UniFil2944".equals(token)) {
-			return ResponseEntity.badRequest().build();
-		}
+	public ResponseEntity<?>excluirMonitor(long id){
 		return avisoService.excluirAviso(id);
 	}
 }
