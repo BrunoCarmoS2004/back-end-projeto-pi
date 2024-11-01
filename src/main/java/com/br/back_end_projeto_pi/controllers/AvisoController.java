@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,26 +25,42 @@ public class AvisoController {
 	private AvisoService avisoService;
 	
 	@GetMapping
-	public ResponseEntity<List<Aviso>>listarMonitors(){
+	public ResponseEntity<List<Aviso>>listarMonitors(@RequestHeader("Token") String token){
+		if (!"UniFil2944".equals(token)) {
+			return ResponseEntity.badRequest().build();
+		}
 		return avisoService.listarAvisos();
+		
 	}
 	@GetMapping("/{id}")
-	public ResponseEntity<Aviso>buscarMonitorPorId(@PathVariable long id){
+	public ResponseEntity<Aviso>buscarMonitorPorId(@PathVariable long id, @RequestHeader("Token")String token){
+		if (!"UniFil2944".equals(token)) {
+			return ResponseEntity.badRequest().build();
+		}
 		return avisoService.buscarAvisoPorId(id);
 	}
 
 	@PostMapping("/criar")
-	public ResponseEntity<Aviso> criarMonitor(@RequestBody Aviso aviso) {
+	public ResponseEntity<Aviso> criarMonitor(@RequestBody Aviso aviso, @RequestHeader("Token")String token) {
+		if (!"UniFil2944".equals(token)) {
+			return ResponseEntity.badRequest().build();
+		}
 		return avisoService.criarAviso(aviso);
 	}
 	
 	@PutMapping("/atualizar/{id}")
-	public ResponseEntity<Aviso> atualizarMonitor(@PathVariable long id, @RequestBody Aviso aviso) {
+	public ResponseEntity<Aviso> atualizarMonitor(@PathVariable long id, @RequestBody Aviso aviso, @RequestHeader("Token")String token) {
+		if (!"UniFil2944".equals(token)) {
+			return ResponseEntity.badRequest().build();
+		}
 		return avisoService.atualizarAviso(id, aviso);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?>excluirMonitor(long id){
+	public ResponseEntity<?>excluirMonitor(long id, @RequestHeader("Token")String token){
+		if (!"UniFil2944".equals(token)) {
+			return ResponseEntity.badRequest().build();
+		}
 		return avisoService.excluirAviso(id);
 	}
 }
